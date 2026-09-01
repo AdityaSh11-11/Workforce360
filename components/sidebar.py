@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 from modules.data_loader import get_active_dataset
 
-# ==========================================================
-# ENTERPRISE SIDEBAR
-# ==========================================================
-
 def enterprise_sidebar():
 
     with st.sidebar:
@@ -14,10 +10,6 @@ def enterprise_sidebar():
         st.caption("Enterprise Workforce Intelligence Platform")
 
         st.divider()
-
-        # =========================
-        # ACTIVE DATASET STATUS
-        # =========================
 
         dataset = get_active_dataset()
 
@@ -52,10 +44,6 @@ def enterprise_sidebar():
 
         st.divider()
 
-        # =========================
-        # PLATFORM STATUS
-        # =========================
-
         st.subheader("Platform Status")
 
         st.success("Application Running")
@@ -64,22 +52,6 @@ def enterprise_sidebar():
         st.info(f"PostgreSQL : {db_status}")
 
         st.divider()
-
-        # =========================
-        # QUICK NAVIGATION
-        # =========================
-
-        st.subheader("Analytics Modules")
-
-        st.page_link("app.py", label="Home")
-
-        st.caption("Data Platform")
-
-        st.divider()
-
-        # =========================
-        # QUICK STATS
-        # =========================
 
         st.subheader("Quick Statistics")
 
