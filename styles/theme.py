@@ -1,9 +1,6 @@
 import streamlit as st
 from datetime import datetime
 
-# ==========================================================
-# ENTERPRISE DARK THEME - INSIGHTFORGE AI V2
-# ==========================================================
 
 PRIMARY = "#2563EB"
 SUCCESS = "#16A34A"
@@ -18,10 +15,6 @@ BORDER = "#243042"
 TEXT = "#F8FAFC"
 SUBTEXT = "#CBD5E1"
 
-
-# ==========================================================
-# LOAD GLOBAL THEME
-# ==========================================================
 
 def load_theme():
 
@@ -178,19 +171,11 @@ hr {{
 """, unsafe_allow_html=True)
 
 
-# ==========================================================
-# HERO
-# ==========================================================
-
 def hero(title, subtitle):
     with st.container(border=True):
         st.markdown(f"# {title}")
         st.caption(subtitle)
 
-
-# ==========================================================
-# PAGE TITLE
-# ==========================================================
 
 def page_title(title, description=""):
 
@@ -201,10 +186,6 @@ def page_title(title, description=""):
 
     st.divider()
 
-
-# ==========================================================
-# SECTION TITLE
-# ==========================================================
 
 def section(title, description=""):
 
@@ -217,9 +198,6 @@ def section(title, description=""):
         st.caption(description)
 
 
-# ==========================================================
-# SUBSECTION TITLE
-# ==========================================================
 
 def subsection(title, description=""):
 
@@ -228,10 +206,6 @@ def subsection(title, description=""):
     if description:
         st.caption(description)
 
-
-# ==========================================================
-# FOOTER
-# ==========================================================
 
 def footer():
 
