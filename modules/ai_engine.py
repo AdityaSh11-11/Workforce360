@@ -1,9 +1,5 @@
 import pandas as pd
 
-# ==========================================================
-# SAFE DATASET
-# ==========================================================
-
 def _clean(df):
     df = df.copy()
 
@@ -23,10 +19,6 @@ def _clean(df):
         df[col] = df[col].fillna("Unknown")
 
     return df
-
-# ==========================================================
-# EXECUTIVE SUMMARY
-# ==========================================================
 
 def generate_executive_summary(df):
     df = _clean(df)
@@ -62,10 +54,6 @@ Recommendation:
 • Track attendance below company average.
 """
 
-# ==========================================================
-# HR RECOMMENDATIONS
-# ==========================================================
-
 def generate_hr_recommendations(df):
     df = _clean(df)
 
@@ -88,9 +76,6 @@ def generate_hr_recommendations(df):
 
     return "\n".join(f"• {i}" for i in rec)
 
-# ==========================================================
-# SQL GENERATOR
-# ==========================================================
 
 def generate_sql_query(prompt):
 
@@ -123,10 +108,6 @@ ORDER BY attendance_percentage DESC;
 
     return f"-- SQL suggestion for: {prompt}"
 
-# ==========================================================
-# POWER BI DAX
-# ==========================================================
-
 def generate_powerbi_dax(prompt):
 
     p = prompt.lower()
@@ -154,10 +135,6 @@ AVERAGE(fact_workforce[attendance_percentage])
 """
 
     return f"-- DAX Measure for: {prompt}"
-
-# ==========================================================
-# AI CHAT
-# ==========================================================
 
 def workforce_chat(question, df):
 
