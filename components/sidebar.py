@@ -89,9 +89,5 @@ def enterprise_sidebar():
 
         st.divider()
 
-        # =========================
-        # SYSTEM INFORMATION
-        # =========================
-
-        st.caption("InsightForge AI v2.0")
+        st.caption("Workforce360 v2.0")
         st.caption("Streamlit • PostgreSQL • Plotly • Pandas")
