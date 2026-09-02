@@ -705,83 +705,83 @@ expand learning programs for lower-performing teams, and use salary intelligence
     st.divider()
 
 
-    section(
-        "PostgreSQL Warehouse & Power BI Control Center",
-        "Manage workforce data inside PostgreSQL and instantly access the Power BI Executive Dashboard."
-    )
+    # section(
+    #     "PostgreSQL Warehouse & Power BI Control Center",
+    #     "Manage workforce data inside PostgreSQL and instantly access the Power BI Executive Dashboard."
+    # )
 
-    records = warehouse_record_count()
+    # records = warehouse_record_count()
 
-    status1, status2, status3 = st.columns(3)
+    # status1, status2, status3 = st.columns(3)
 
-    with status1:
-        kpi("", "Warehouse Records", f"{records:,}")
+    # with status1:
+    #     kpi("", "Warehouse Records", f"{records:,}")
 
-    with status2:
-        kpi("", "Warehouse Connection", "Connected")
+    # with status2:
+    #     kpi("", "Warehouse Connection", "Connected")
 
-    with status3:
-        kpi("", "Power BI Sync Status", "Ready")
+    # with status3:
+    #     kpi("", "Power BI Sync Status", "Ready")
 
-    st.markdown("---")
+    # st.markdown("---")
 
-    button1, button2, button3 = st.columns(3)
-
-
-    with button1:
-
-        if st.button(
-            "Load Dataset into PostgreSQL",
-            use_container_width=True,
-            type="primary"
-        ):
-
-            with st.spinner("Uploading workforce dataset into PostgreSQL Warehouse..."):
-
-                dataset_id = load_workforce(
-                    df,
-                    st.session_state.dataset_name,
-                    st.session_state.dataset_type,
-                    float(st.session_state.quality["score"])
-                )
-
-            write_log(
-                "Dataset Loaded into PostgreSQL",
-                st.session_state.dataset_name,
-                len(df)
-            )
-
-            st.success(
-                f"Dataset successfully stored in PostgreSQL Warehouse. Dataset ID : {dataset_id}"
-            )
-
-            st.info(
-                "Power BI will display the latest workforce data after clicking Refresh."
-            )
+    # button1, button2, button3 = st.columns(3)
 
 
-    with button2:
+    # with button1:
 
-        if st.button(
-            "Remove Dataset from PostgreSQL",
-            use_container_width=True
-        ):
+    #     if st.button(
+    #         "Load Dataset into PostgreSQL",
+    #         use_container_width=True,
+    #         type="primary"
+    #     ):
 
-            clear_workforce_data()
+    #         with st.spinner("Uploading workforce dataset into PostgreSQL Warehouse..."):
 
-            write_log(
-                "PostgreSQL Warehouse Cleared",
-                "Workforce Warehouse",
-                0
-            )
+    #             dataset_id = load_workforce(
+    #                 df,
+    #                 st.session_state.dataset_name,
+    #                 st.session_state.dataset_type,
+    #                 float(st.session_state.quality["score"])
+    #             )
 
-            st.success(
-                "All workforce records have been removed from PostgreSQL Warehouse."
-            )
+    #         write_log(
+    #             "Dataset Loaded into PostgreSQL",
+    #             st.session_state.dataset_name,
+    #             len(df)
+    #         )
 
-            st.warning(
-                "After refreshing Power BI, the dashboard will become empty until a new dataset is uploaded."
-            )
+    #         st.success(
+    #             f"Dataset successfully stored in PostgreSQL Warehouse. Dataset ID : {dataset_id}"
+    #         )
+
+    #         st.info(
+    #             "Power BI will display the latest workforce data after clicking Refresh."
+    #         )
+
+
+    # with button2:
+
+    #     if st.button(
+    #         "Remove Dataset from PostgreSQL",
+    #         use_container_width=True
+    #     ):
+
+    #         clear_workforce_data()
+
+    #         write_log(
+    #             "PostgreSQL Warehouse Cleared",
+    #             "Workforce Warehouse",
+    #             0
+    #         )
+
+    #         st.success(
+    #             "All workforce records have been removed from PostgreSQL Warehouse."
+    #         )
+
+    #         st.warning(
+    #             "After refreshing Power BI, the dashboard will become empty until a new dataset is uploaded."
+    #         )
 
  
 
@@ -912,5 +912,3 @@ with feature_col2:
         - AI Workforce Insights
         - Live Power BI Integration
         """
-    
-    )===================================
