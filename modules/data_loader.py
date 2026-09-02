@@ -1,11 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-# ==========================================================
-# STANDARD WORKFORCE SCHEMA
-# Compatible with CSV, Excel, Manual Entry and PostgreSQL
-# ==========================================================
-
 STANDARD_COLUMNS = {
     "employee id": "Employee_ID",
     "employeeid": "Employee_ID",
@@ -103,9 +98,6 @@ REQUIRED_COLUMNS = [
     "Attrition_Status",
 ]
 
-# ==========================================================
-# COLUMN NORMALIZATION
-# ==========================================================
 
 def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
 
@@ -119,11 +111,6 @@ def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     df.rename(columns=STANDARD_COLUMNS, inplace=True)
 
     return df
-
-
-# ==========================================================
-# CREATE MISSING COLUMNS
-# ==========================================================
 
 def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
 
@@ -157,7 +144,7 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
         if col not in df.columns:
             df[col] = defaults[col]
 
-    # ---------- Numeric ----------
+
 
     numeric_cols = [
         "Age",
@@ -173,7 +160,6 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(defaults[col])
 
-    # ---------- Date ----------
 
     df["Joining_Date"] = pd.to_datetime(
         df["Joining_Date"],
@@ -183,8 +169,6 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
     df["Joining_Date"] = df["Joining_Date"].fillna(
         pd.Timestamp.today()
     )
-
-    # ---------- Strings ----------
 
     string_cols = [
         "Employee_ID",
@@ -211,7 +195,6 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
             .str.strip()
         )
 
-    # ---------- Auto Employee IDs ----------
 
     if (df["Employee_ID"] == "").any():
 
@@ -222,7 +205,6 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
             for i in range(missing.sum())
         ]
 
-    # ---------- Derived Columns ----------
 
     df["Joining_Year"] = df["Joining_Date"].dt.year
 
@@ -261,10 +243,6 @@ def ensure_schema(df: pd.DataFrame) -> pd.DataFrame:
     ]]
 
 
-# ==========================================================
-# QUALITY REPORT
-# ==========================================================
-
 def dataset_quality(df: pd.DataFrame):
 
     quality = {
@@ -283,10 +261,6 @@ def dataset_quality(df: pd.DataFrame):
 
     return quality
 
-
-# ==========================================================
-# FILE LOADER
-# ==========================================================
 
 def load_dataset(uploaded_file):
 
@@ -318,10 +292,6 @@ def load_dataset(uploaded_file):
             "message": str(e)
         }
 
-
-# ==========================================================
-# SESSION DATASET HELPERS
-# ==========================================================
 
 def save_session_dataset(df, dataset_name="Manual Dataset", dataset_type="Direct Upload"):
 
