@@ -5,14 +5,14 @@ from datetime import datetime
 from styles.theme import load_theme, hero, footer
 from styles.cards import section, kpi, dataset_card, ai_summary, empty_state
 from modules.data_loader import get_active_dataset
-
+from components.sidebar import enterprise_sidebar
 
 st.set_page_config(
     page_title="InsightForge AI",
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
+enterprise_sidebar()
 load_theme()
 
 df = get_active_dataset()
