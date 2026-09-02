@@ -8,9 +8,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(
     page_title="Export Center",
@@ -24,20 +21,12 @@ hero(
     "Export workforce datasets, executive reports and Power BI-ready files."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
     empty_state("No workforce dataset available.")
     footer()
     st.stop()
-
-# ==========================================================
-# EXCEL EXPORT FUNCTION
-# ==========================================================
 
 def create_excel(dataframe):
     output = BytesIO()
@@ -52,16 +41,8 @@ def create_excel(dataframe):
     output.seek(0)
     return output
 
-# ==========================================================
-# CSV EXPORT
-# ==========================================================
-
 csv_data = df.to_csv(index=False).encode("utf-8")
 excel_data = create_excel(df)
-
-# ==========================================================
-# EXPORT DASHBOARD
-# ==========================================================
 
 section(
     "Dataset Export",
@@ -88,10 +69,6 @@ with c2:
     )
 
 st.divider()
-
-# ==========================================================
-# EXECUTIVE SUMMARY REPORT
-# ==========================================================
 
 section(
     "Executive Workforce Report",
@@ -154,10 +131,6 @@ st.download_button(
 
 st.divider()
 
-# ==========================================================
-# POWER BI EXPORT
-# ==========================================================
-
 section(
     "Power BI Export",
     "Export a clean workforce table optimized for Microsoft Power BI."
@@ -185,11 +158,6 @@ st.caption(
 )
 
 st.divider()
-
-# ==========================================================
-# DEPARTMENT REPORTS
-# ==========================================================
-
 section(
     "Department-wise Reports",
     "Export individual department datasets."
@@ -221,10 +189,6 @@ st.download_button(
 )
 
 st.divider()
-
-# ==========================================================
-# LOCATION REPORTS
-# ==========================================================
 
 section(
     "Location-wise Reports",
@@ -258,10 +222,6 @@ st.download_button(
 
 st.divider()
 
-# ==========================================================
-# ATTRITION REPORT
-# ==========================================================
-
 section(
     "Attrition Report",
     "Download only employees marked as Left."
@@ -288,10 +248,6 @@ st.download_button(
 )
 
 st.divider()
-
-# ==========================================================
-# FULL DATA PREVIEW
-# ==========================================================
 
 section(
     "Current Active Dataset",
