@@ -6,10 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ==========================================================
-# DATABASE CONNECTION
-# ==========================================================
-
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
@@ -23,10 +19,6 @@ if not DATABASE_URL:
     )
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-
-# ==========================================================
-# CREATE TABLES (AUTO)
-# ==========================================================
 
 def initialize_database():
     with engine.begin() as conn:
@@ -103,9 +95,6 @@ def initialize_database():
         );
         """))
 
-# ==========================================================
-# REGISTER DATASET
-# ==========================================================
 
 def register_dataset(name, dtype, quality, rows):
 
@@ -137,10 +126,6 @@ def register_dataset(name, dtype, quality, rows):
         }).scalar()
 
     return dataset_id
-
-# ==========================================================
-# LOAD DATASET INTO FACT TABLE
-# ==========================================================
 
 def load_workforce(df, dataset_name, dataset_type, quality_score):
 
@@ -177,10 +162,6 @@ def load_workforce(df, dataset_name, dataset_type, quality_score):
     )
 
     return dataset_id
-
-# ==========================================================
-# AUDIT LOG
-# ==========================================================
 
 def log_ingestion(dataset_id, activity, rows):
 
@@ -224,10 +205,6 @@ def fetch_workforce():
     except SQLAlchemyError:
         return pd.DataFrame()
 
-# ==========================================================
-# DATASET LIST
-# ==========================================================
-
 def fetch_datasets():
 
     initialize_database()
@@ -238,9 +215,6 @@ def fetch_datasets():
     ORDER BY uploaded_at DESC
     """,engine)
 
-# ==========================================================
-# AUDIT HISTORY
-# ==========================================================
 
 def fetch_audit_logs():
     initialize_database()
@@ -261,9 +235,6 @@ def fetch_audit_logs():
         ORDER BY log_id DESC
         """, engine)
 
-# ==========================================================
-# CLEAR WAREHOUSE
-# ==========================================================
 
 def clear_database():
 
@@ -277,10 +248,6 @@ def clear_database():
 
 from sqlalchemy import text
 
-# -------------------------------------------
-# CLEAR WORKFORCE DATA FROM POSTGRESQL
-# -------------------------------------------
-
 def clear_workforce_data():
     initialize_database()
 
@@ -290,10 +257,6 @@ def clear_workforce_data():
 
     return True
 
-
-# -------------------------------------------
-# CHECK RECORD COUNT
-# -------------------------------------------
 
 def warehouse_record_count():
     initialize_database()
