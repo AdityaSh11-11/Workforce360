@@ -21,7 +21,7 @@ Unlike traditional dashboards, Workforce360 provides an end-to-end analytics wor
 
 ---
 
-# ✨ Enterprise Features
+# Enterprise Features
 
 | Module | Description |
 |--------|-------------|
@@ -39,7 +39,7 @@ Unlike traditional dashboards, Workforce360 provides an end-to-end analytics wor
 
 ---
 
-# 🖥️ Complete Platform Architecture
+# Complete Platform Architecture
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/ashishps1/awesome-low-level-design/main/diagrams/data-pipeline.png" width="90%">
@@ -69,7 +69,7 @@ Unlike traditional dashboards, Workforce360 provides an end-to-end analytics wor
 
 ---
 
-# 🏗️ Tech Stack
+# Tech Stack
 
 | Category | Technology |
 |----------|------------|
@@ -86,7 +86,7 @@ Unlike traditional dashboards, Workforce360 provides an end-to-end analytics wor
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```text
 Workforce360/
@@ -132,9 +132,9 @@ Workforce360/
 
 ---
 
-# 📊 Workforce Analytics Modules
+# Workforce Analytics Modules
 
-## 1️⃣ Workforce Overview
+## 1- Workforce Overview
 
 - Executive KPI Dashboard
 - Employee Demographics
@@ -147,7 +147,7 @@ Workforce360/
 
 ---
 
-## 2️⃣ Salary Intelligence
+## 2️- Salary Intelligence
 
 - Total Payroll
 - Average Salary
@@ -160,7 +160,7 @@ Workforce360/
 
 ---
 
-## 3️⃣ Performance Intelligence
+## 3️- Performance Intelligence
 
 - Average Performance Score
 - Attendance vs Performance
@@ -173,7 +173,7 @@ Workforce360/
 
 ---
 
-## 4️⃣ Attrition Intelligence
+## 4️- Attrition Intelligence
 
 - Attrition Rate
 - Active vs Left Employees
@@ -185,7 +185,7 @@ Workforce360/
 
 ---
 
-## 5️⃣ AI Workforce Intelligence
+## 5️- AI Workforce Intelligence
 
 - AI Workforce Score
 - Executive HR Recommendations
@@ -196,7 +196,7 @@ Workforce360/
 
 ---
 
-## 6️⃣ Workforce Forecasting
+## 6️- Workforce Forecasting
 
 - Hiring Forecast
 - Payroll Forecast
@@ -208,7 +208,7 @@ Workforce360/
 
 ---
 
-## 7️⃣ Admin Center
+## 7️- Admin Center
 
 - PostgreSQL Health
 - Warehouse Monitoring
@@ -219,7 +219,7 @@ Workforce360/
 
 ---
 
-## 8️⃣ Audit Center
+## 8️- Audit Center
 
 - Upload History
 - PostgreSQL Events
@@ -229,7 +229,7 @@ Workforce360/
 
 ---
 
-# 🗄️ PostgreSQL Workforce Warehouse
+# PostgreSQL Workforce Warehouse
 
 ### Star Schema Design
 
@@ -256,7 +256,7 @@ dim_department ─ fact_workforce ─ dim_location
 
 ---
 
-# 📥 Data Ingestion Pipeline
+# Data Ingestion Pipeline
 
 ### Supported Upload Methods
 
@@ -288,7 +288,7 @@ dim_department ─ fact_workforce ─ dim_location
 
 ---
 
-# 📈 Power BI Executive Dashboard
+# Power BI Executive Dashboard
 
 ## Live Enterprise Dashboard
 
@@ -321,7 +321,7 @@ Updated Executive Dashboard
 
 ---
 
-# 🤖 AI Decision Intelligence
+# AI Decision Intelligence
 
 The AI engine generates executive workforce insights using workforce metrics.
 
@@ -435,7 +435,7 @@ http://localhost:8501
 
 ---
 
-# 📦 Power BI Setup
+# Power BI Setup
 
 1. Publish `Workforce360.pbix` to Power BI Service.
 2. Connect Power BI to PostgreSQL database.
@@ -445,7 +445,7 @@ http://localhost:8501
 
 ---
 
-# 📁 Dataset Information
+# Dataset Information
 
 | Attribute | Details |
 |-----------|---------|
@@ -458,7 +458,7 @@ http://localhost:8501
 
 ---
 
-# 🚀 Enterprise Highlights
+# Enterprise Highlights
 
 - Enterprise Workforce Intelligence Platform
 - PostgreSQL Star Schema Warehouse
@@ -471,7 +471,7 @@ http://localhost:8501
 
 ---
 
-# 📚 Skills Demonstrated
+# Skills Demonstrated
 
 ### Data Analytics
 
@@ -507,7 +507,7 @@ http://localhost:8501
 
 ---
 
-# 💼 Resume Project Description
+# Resume Project Description
 
 **Workforce360 — Enterprise Workforce Intelligence Platform**
 
@@ -515,7 +515,7 @@ Designed and developed a full-stack workforce analytics platform integrating **S
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Aditya Sharma**
 
