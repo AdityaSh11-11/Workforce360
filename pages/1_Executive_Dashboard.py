@@ -8,10 +8,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
-
 st.set_page_config(page_title="Executive Dashboard", layout="wide")
 load_theme()
 
@@ -20,10 +16,6 @@ hero(
     "Enterprise-level workforce KPIs, payroll analytics, hiring trends and business intelligence."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
@@ -31,9 +23,6 @@ if df is None or df.empty:
     footer()
     st.stop()
 
-# ==========================================================
-# CLEAN NUMERIC COLUMNS
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -49,9 +38,6 @@ for col in numeric_cols:
 
 df["Joining_Date"] = pd.to_datetime(df["Joining_Date"], errors="coerce")
 
-# ==========================================================
-# FILTERS
-# ==========================================================
 
 section(
     "Executive Filters",
@@ -90,10 +76,6 @@ if city != "All":
 
 if emp_type != "All":
     filtered = filtered[filtered["Employment_Type"] == emp_type]
-
-# ==========================================================
-# KPI SECTION
-# ==========================================================
 
 section(
     "Executive Workforce Snapshot",
@@ -138,11 +120,6 @@ with r2[2]:
     kpi("Attrition Rate", f"{attrition:.1f}%", "Current Attrition")
 
 st.divider()
-
-# ==========================================================
-# CHARTS ROW 1
-# ==========================================================
-
 section(
     "Department & Payroll Analytics",
     "Compare workforce size and compensation across departments."
@@ -205,11 +182,6 @@ with right:
     )
 
 st.divider()
-
-# ==========================================================
-# CHARTS ROW 2
-# ==========================================================
-
 section(
     "Geographic Workforce Analytics",
     "Understand employee distribution across cities."
@@ -242,9 +214,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# PERFORMANCE VS ATTENDANCE
-# ==========================================================
 
 section(
     "Attendance and Performance Intelligence",
@@ -277,10 +246,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# EXPERIENCE ANALYTICS
-# ==========================================================
-
 section(
     "Experience Distribution",
     "Workforce experience segmentation."
@@ -311,9 +276,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# JOINING TREND
-# ==========================================================
 
 section(
     "Hiring Trend Analysis",
