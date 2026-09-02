@@ -7,9 +7,7 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
+
 
 st.set_page_config(
     page_title="SQL & Power BI Center",
@@ -23,9 +21,6 @@ hero(
     "Generate PostgreSQL queries, Power BI DAX measures and BI-ready workforce reports."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
 
 df = get_active_dataset()
 
@@ -34,9 +29,6 @@ if df is None or df.empty:
     footer()
     st.stop()
 
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -51,9 +43,6 @@ numeric_cols = [
 for col in numeric_cols:
     df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-# ==========================================================
-# TABS
-# ==========================================================
 
 tab1, tab2, tab3, tab4 = st.tabs([
     "PostgreSQL Queries",
@@ -62,9 +51,6 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "Business Intelligence Guide"
 ])
 
-# ==========================================================
-# TAB 1 — SQL QUERIES
-# ==========================================================
 
 with tab1:
 
@@ -205,9 +191,6 @@ ORDER BY joining_year;
         "These PostgreSQL queries can be executed directly against the InsightForge AI warehouse for reporting and dashboard development."
     )
 
-# ==========================================================
-# TAB 2 — POWER BI DAX
-# ==========================================================
 
 with tab2:
 
@@ -316,9 +299,6 @@ AVERAGE(fact_workforce[overtime_hours])
         "Use these DAX measures directly in Microsoft Power BI visuals, KPI cards and executive dashboards."
     )
 
-# ==========================================================
-# TAB 3 — KPI FORMULA LIBRARY
-# ==========================================================
 
 with tab3:
 
@@ -369,9 +349,6 @@ with tab3:
         use_container_width=True
     )
 
-# ==========================================================
-# TAB 4 — BI GUIDE
-# ==========================================================
 
 with tab4:
 
