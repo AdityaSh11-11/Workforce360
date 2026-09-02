@@ -20,4 +20,4 @@ with engine.begin() as conn:
         if statement:
             conn.execute(text(statement))
 
-print("✅ InsightForge Workforce Database Initialized Successfully.")
+print("Workforce Database Initialized Successfully.")
