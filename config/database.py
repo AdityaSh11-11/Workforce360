@@ -1,18 +1,16 @@
 import os
 from sqlalchemy import create_engine
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = os.getenv("DB_PORT", "yourportnumber")
-DB_NAME = os.getenv("DB_NAME", "insightforge")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "yourpassword")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASE_URL = (
-    f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-)
+# Local Development
+if DATABASE_URL is None:
+    DATABASE_URL = (
+        "postgresql+psycopg2://postgres:yourpassword@localhost:5432/workforce360"
+    )
 
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True
+    pool_pre_ping=True,
+    pool_recycle=300
 )
