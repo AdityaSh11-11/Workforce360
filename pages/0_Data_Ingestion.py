@@ -20,21 +20,36 @@ from modules.warehouse import (
 
 from modules.audit_engine import write_log
 import streamlit.components.v1 as components
+# ==========================================================
+# PAGE CONFIGURATION
+# ==========================================================
+
 st.set_page_config(
     page_title="Workforce Data Ingestion",
-    page_icon="",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+# ==========================================================
+# LOAD THEME & SIDEBAR
+# ==========================================================
+
 load_theme()
 enterprise_sidebar()
+
+# ==========================================================
+# HERO SECTION
+# ==========================================================
 
 hero(
     "Workforce Data Ingestion",
     "Enterprise ETL Pipeline • CSV & Excel Upload • PostgreSQL Warehouse • Power BI Integration"
 )
 
+# ==========================================================
+# SESSION STATE INITIALIZATION
+# ==========================================================
 
 default_session = {
     "dataset": None,
@@ -48,6 +63,9 @@ for key, value in default_session.items():
     if key not in st.session_state:
         st.session_state[key] = value
 
+# ==========================================================
+# POSTGRESQL WAREHOUSE STATUS
+# ==========================================================
 
 try:
     warehouse_records = warehouse_record_count()
@@ -77,6 +95,9 @@ with c4:
 
 st.divider()
 
+# ==========================================================
+# DATA LOADING MODE
+# ==========================================================
 
 section(
     "Choose Dataset Loading Mode",
@@ -103,6 +124,10 @@ else:
 
 st.divider()
 
+# ==========================================================
+# FILE UPLOAD SECTION
+# ==========================================================
+
 section(
     "Upload Workforce Dataset",
     "Supported formats: CSV (.csv), Excel (.xlsx, .xls). The application automatically validates and standardizes the uploaded dataset."
@@ -113,6 +138,10 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx", "xls"],
     help="Upload a workforce dataset containing employee, salary, attendance, performance and attrition information."
 )
+
+# ==========================================================
+# LOAD DATASET
+# ==========================================================
 
 if uploaded_file is not None:
 
@@ -143,6 +172,9 @@ if uploaded_file is not None:
 
 st.divider()
 
+# ==========================================================
+# MANUAL EMPLOYEE ENTRY
+# ==========================================================
 
 section(
     "Manual Employee Entry",
@@ -336,6 +368,9 @@ with st.expander("Open Employee Registration Form", expanded=False):
 
 st.divider()
 
+# ==========================================================
+# DATASET QUALITY OVERVIEW
+# ==========================================================
 
 if st.session_state.dataset is not None:
 
@@ -372,6 +407,9 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
+    # ======================================================
+    # DATASET INFORMATION
+    # ======================================================
 
     section(
         "Dataset Information",
@@ -405,6 +443,9 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
+    # ======================================================
+    # DATASET PREVIEW
+    # ======================================================
 
     section(
         "Workforce Dataset Preview",
@@ -419,6 +460,9 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
+    # ======================================================
+    # DOWNLOAD CENTER
+    # ======================================================
 
     section(
         "Dataset Download Center",
@@ -451,6 +495,9 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
+# ==========================================================
+# DATA QUALITY ANALYTICS DASHBOARD
+# ==========================================================
 
 if st.session_state.dataset is not None:
 
@@ -461,6 +508,9 @@ if st.session_state.dataset is not None:
         "Visual exploration of salary, attendance, performance, experience and attrition across the workforce."
     )
 
+    # ------------------------------------------------------
+    # Row 1
+    # ------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
@@ -504,6 +554,9 @@ if st.session_state.dataset is not None:
 
         st.plotly_chart(fig, use_container_width=True)
 
+    # ------------------------------------------------------
+    # Row 2
+    # ------------------------------------------------------
 
     left, right = st.columns(2)
 
@@ -564,6 +617,10 @@ if st.session_state.dataset is not None:
 
         st.plotly_chart(fig, use_container_width=True)
 
+    # ------------------------------------------------------
+    # Attendance vs Performance
+    # ------------------------------------------------------
+
     section(
         "Attendance vs Performance Intelligence",
         "Bubble size represents employee training hours while color represents department."
@@ -597,6 +654,9 @@ if st.session_state.dataset is not None:
 
     st.plotly_chart(fig, use_container_width=True)
 
+    # ------------------------------------------------------
+    # Salary vs Experience
+    # ------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
@@ -653,6 +713,9 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
+    # ==========================================================
+    # BUSINESS INSIGHT PANEL
+    # ==========================================================
 
     section(
         "Business Insight Summary",
@@ -704,86 +767,99 @@ expand learning programs for lower-performing teams, and use salary intelligence
 
     st.divider()
 
+    # ==========================================================
+    # POSTGRESQL WAREHOUSE CONTROL CENTER
+    # ==========================================================
 
-    # section(
-    #     "PostgreSQL Warehouse & Power BI Control Center",
-    #     "Manage workforce data inside PostgreSQL and instantly access the Power BI Executive Dashboard."
-    # )
+    section(
+        "PostgreSQL Warehouse & Power BI Control Center",
+        "Manage workforce data inside PostgreSQL and instantly access the Power BI Executive Dashboard."
+    )
 
-    # records = warehouse_record_count()
+    records = warehouse_record_count()
 
-    # status1, status2, status3 = st.columns(3)
+    status1, status2, status3 = st.columns(3)
 
-    # with status1:
-    #     kpi("", "Warehouse Records", f"{records:,}")
+    with status1:
+        kpi("", "Warehouse Records", f"{records:,}")
 
-    # with status2:
-    #     kpi("", "Warehouse Connection", "Connected")
+    with status2:
+        kpi("", "Warehouse Connection", "Connected")
 
-    # with status3:
-    #     kpi("", "Power BI Sync Status", "Ready")
+    with status3:
+        kpi("", "Power BI Sync Status", "Ready")
 
-    # st.markdown("---")
+    st.markdown("---")
 
-    # button1, button2, button3 = st.columns(3)
+    button1, button2, button3 = st.columns(3)
 
+    # ----------------------------------------------------------
+    # INSERT DATA INTO POSTGRESQL
+    # ----------------------------------------------------------
 
-    # with button1:
+    with button1:
 
-    #     if st.button(
-    #         "Load Dataset into PostgreSQL",
-    #         use_container_width=True,
-    #         type="primary"
-    #     ):
+        if st.button(
+            "Load Dataset into PostgreSQL",
+            use_container_width=True,
+            type="primary"
+        ):
 
-    #         with st.spinner("Uploading workforce dataset into PostgreSQL Warehouse..."):
+            with st.spinner("Uploading workforce dataset into PostgreSQL Warehouse..."):
 
-    #             dataset_id = load_workforce(
-    #                 df,
-    #                 st.session_state.dataset_name,
-    #                 st.session_state.dataset_type,
-    #                 float(st.session_state.quality["score"])
-    #             )
+                dataset_id = load_workforce(
+                    df,
+                    st.session_state.dataset_name,
+                    st.session_state.dataset_type,
+                    float(st.session_state.quality["score"])
+                )
 
-    #         write_log(
-    #             "Dataset Loaded into PostgreSQL",
-    #             st.session_state.dataset_name,
-    #             len(df)
-    #         )
+            write_log(
+                "Dataset Loaded into PostgreSQL",
+                st.session_state.dataset_name,
+                len(df)
+            )
 
-    #         st.success(
-    #             f"Dataset successfully stored in PostgreSQL Warehouse. Dataset ID : {dataset_id}"
-    #         )
+            st.success(
+                f"Dataset successfully stored in PostgreSQL Warehouse. Dataset ID : {dataset_id}"
+            )
 
-    #         st.info(
-    #             "Power BI will display the latest workforce data after clicking Refresh."
-    #         )
+            st.info(
+                "Power BI will display the latest workforce data after clicking Refresh."
+            )
 
+    # ----------------------------------------------------------
+    # DELETE DATA FROM POSTGRESQL
+    # ----------------------------------------------------------
 
-    # with button2:
+    with button2:
 
-    #     if st.button(
-    #         "Remove Dataset from PostgreSQL",
-    #         use_container_width=True
-    #     ):
+        if st.button(
+            "Remove Dataset from PostgreSQL",
+            use_container_width=True
+        ):
 
-    #         clear_workforce_data()
+            clear_workforce_data()
 
-    #         write_log(
-    #             "PostgreSQL Warehouse Cleared",
-    #             "Workforce Warehouse",
-    #             0
-    #         )
+            write_log(
+                "PostgreSQL Warehouse Cleared",
+                "Workforce Warehouse",
+                0
+            )
 
-    #         st.success(
-    #             "All workforce records have been removed from PostgreSQL Warehouse."
-    #         )
+            st.success(
+                "All workforce records have been removed from PostgreSQL Warehouse."
+            )
 
-    #         st.warning(
-    #             "After refreshing Power BI, the dashboard will become empty until a new dataset is uploaded."
-    #         )
+            st.warning(
+                "After refreshing Power BI, the dashboard will become empty until a new dataset is uploaded."
+            )
 
- 
+  
+
+# ==========================================================
+# CURRENT SESSION DATASET SUMMARY
+# ==========================================================
 
 section(
     "Current Session Dataset Summary",
@@ -833,6 +909,9 @@ else:
 
 st.divider()
 
+# ==========================================================
+# RESET SESSION WORKSPACE
+# ==========================================================
 
 section(
     "Reset Streamlit Workspace",
@@ -876,6 +955,9 @@ if st.button(
 
 st.divider()
 
+# ==========================================================
+# PLATFORM FEATURES OVERVIEW
+# ==========================================================
 
 section(
     "InsightForge AI Platform Capabilities",
@@ -913,3 +995,31 @@ with feature_col2:
         - Live Power BI Integration
         """
     )
+
+st.divider()
+
+# ==========================================================
+# PROJECT INFORMATION
+# ==========================================================
+
+section(
+    "About This Platform",
+    "Enterprise Workforce Analytics & Decision Intelligence Platform"
+)
+
+st.info(
+    """
+    **InsightForge AI** is an enterprise workforce intelligence platform built using
+    Streamlit, PostgreSQL, Plotly, OpenRouter AI, and Power BI.
+
+    The platform enables HR teams to ingest workforce datasets, perform advanced analytics,
+    generate AI-powered insights, manage a PostgreSQL warehouse, and visualize executive dashboards
+    through a live-connected Power BI report.
+    """
+)
+
+# ==========================================================
+# FOOTER
+# ==========================================================
+
+footer()
