@@ -8,9 +8,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(page_title="Performance Analytics", layout="wide")
 load_theme()
@@ -19,21 +16,12 @@ hero(
     "Performance Analytics Dashboard",
     "Employee performance, attendance, training effectiveness and productivity intelligence."
 )
-
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
     empty_state("No workforce dataset available.")
     footer()
     st.stop()
-
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Performance_Rating",
@@ -49,10 +37,6 @@ for col in numeric_cols:
 
 # Prevent Plotly NaN size errors
 df["Training_Hours"] = df["Training_Hours"].clip(lower=1)
-
-# ==========================================================
-# FILTERS
-# ==========================================================
 
 section(
     "Performance Filters",
@@ -92,9 +76,6 @@ filtered = filtered[
     filtered["Performance_Rating"] >= rating_filter
 ]
 
-# ==========================================================
-# KPI SECTION
-# ==========================================================
 
 section(
     "Performance KPI Overview",
@@ -125,10 +106,6 @@ r1[3].metric(
 
 st.divider()
 
-# ==========================================================
-# PERFORMANCE DISTRIBUTION
-# ==========================================================
-
 section(
     "Performance Rating Distribution",
     "Distribution of employee performance ratings."
@@ -157,9 +134,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# DEPARTMENT PERFORMANCE
-# ==========================================================
 
 section(
     "Department Performance Comparison",
@@ -190,9 +164,6 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
-# ==========================================================
-# ATTENDANCE VS PERFORMANCE
-# ==========================================================
 
 section(
     "Attendance vs Performance",
@@ -224,9 +195,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# TRAINING EFFECTIVENESS
-# ==========================================================
 
 section(
     "Training Effectiveness Analysis",
@@ -257,9 +225,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# OVERTIME ANALYTICS
-# ==========================================================
 
 section(
     "Overtime Analysis",
@@ -290,9 +255,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# EXPERIENCE VS PERFORMANCE
-# ==========================================================
 
 section(
     "Experience vs Performance",
@@ -316,9 +278,6 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
-# ==========================================================
-# TOP PERFORMERS
-# ==========================================================
 
 section(
     "Top Performing Employees",
@@ -354,9 +313,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# LOW PERFORMANCE WATCHLIST
-# ==========================================================
 
 section(
     "Performance Watchlist",
