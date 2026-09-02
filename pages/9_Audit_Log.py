@@ -8,9 +8,6 @@ from modules.warehouse import fetch_audit_logs, fetch_datasets
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(
     page_title="Audit Log",
@@ -24,9 +21,6 @@ hero(
     "Track dataset uploads, PostgreSQL warehouse activity and ingestion history."
 )
 
-# ==========================================================
-# LOAD DATA
-# ==========================================================
 
 audit_df = fetch_audit_logs()
 dataset_df = fetch_datasets()
@@ -35,10 +29,6 @@ if audit_df.empty and dataset_df.empty:
     empty_state("No audit records found in PostgreSQL Warehouse.")
     footer()
     st.stop()
-
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 if not audit_df.empty:
     audit_df["log_time"] = pd.to_datetime(
@@ -51,10 +41,6 @@ if not dataset_df.empty:
         dataset_df["uploaded_at"],
         errors="coerce"
     )
-
-# ==========================================================
-# KPI OVERVIEW
-# ==========================================================
 
 section(
     "Warehouse Activity Overview",
@@ -79,10 +65,6 @@ if not dataset_df.empty:
 
 st.divider()
 
-# ==========================================================
-# DATASET REGISTRY
-# ==========================================================
-
 section(
     "Dataset Registry",
     "Every dataset uploaded into PostgreSQL Warehouse."
@@ -103,10 +85,6 @@ if not dataset_df.empty:
     )
 
 st.divider()
-
-# ==========================================================
-# QUALITY SCORE TREND
-# ==========================================================
 
 section(
     "Dataset Quality Trend",
@@ -138,10 +116,6 @@ if not dataset_df.empty:
 
 st.divider()
 
-# ==========================================================
-# RECORD COUNT TREND
-# ==========================================================
-
 section(
     "Dataset Size Comparison",
     "Compare total employee records stored in each dataset."
@@ -165,10 +139,6 @@ if not dataset_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
-
-# ==========================================================
-# INGESTION TIMELINE
-# ==========================================================
 
 section(
     "Dataset Upload Timeline",
@@ -200,10 +170,6 @@ if not dataset_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
-
-# ==========================================================
-# AUDIT EVENT DISTRIBUTION
-# ==========================================================
 
 section(
     "Audit Event Distribution",
@@ -242,10 +208,6 @@ if not audit_df.empty:
 
 st.divider()
 
-# ==========================================================
-# AUDIT TIMELINE TABLE
-# ==========================================================
-
 section(
     "Audit Timeline",
     "Chronological PostgreSQL warehouse activity log."
@@ -266,10 +228,6 @@ if not audit_df.empty:
     )
 
 st.divider()
-
-# ==========================================================
-# DATASET DETAILS
-# ==========================================================
 
 section(
     "Dataset Details",
@@ -302,10 +260,6 @@ if not dataset_df.empty:
         )
 
 st.divider()
-
-# ==========================================================
-# EXECUTIVE SUMMARY
-# ==========================================================
 
 section(
     "Audit Executive Summary",
