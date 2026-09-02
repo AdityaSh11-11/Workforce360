@@ -6,9 +6,6 @@ from styles.theme import load_theme, hero, footer
 from styles.cards import section, kpi, dataset_card, ai_summary, empty_state
 from modules.data_loader import get_active_dataset
 
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(
     page_title="InsightForge AI",
@@ -18,19 +15,12 @@ st.set_page_config(
 
 load_theme()
 
-# ==========================================================
-# LOAD ACTIVE DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 dataset_name = st.session_state.get("dataset_name", "No Dataset Loaded")
 dataset_type = st.session_state.get("dataset_type", "None")
 quality = st.session_state.get("quality", {"score": 0})
 
-# ==========================================================
-# HERO SECTION
-# ==========================================================
 
 hero(
     "InsightForge AI Workforce Intelligence Platform",
@@ -43,9 +33,6 @@ st.caption(
 
 st.divider()
 
-# ==========================================================
-# DATASET STATUS
-# ==========================================================
 
 section(
     "Current Dataset",
@@ -57,9 +44,6 @@ if df is not None and not df.empty:
 else:
     empty_state("No Workforce Dataset Available")
 
-# ==========================================================
-# KPI OVERVIEW
-# ==========================================================
 
 section(
     "Executive Workforce Snapshot",
@@ -150,9 +134,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# PLATFORM OVERVIEW
-# ==========================================================
 
 section(
     "Platform Modules",
@@ -183,9 +164,6 @@ for i in range(0, len(modules), 3):
 
 st.divider()
 
-# ==========================================================
-# DATA PREVIEW
-# ==========================================================
 
 section(
     "Dataset Preview",
@@ -210,9 +188,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# BUSINESS OBJECTIVES
-# ==========================================================
 
 section(
     "Business Objectives",
@@ -264,9 +239,6 @@ with col2:
 
 st.divider()
 
-# ==========================================================
-# AI EXECUTIVE SUMMARY
-# ==========================================================
 
 section(
     "AI Executive Workforce Summary",
@@ -300,9 +272,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# TECHNOLOGY STACK
-# ==========================================================
 
 section(
     "Technology Stack",
