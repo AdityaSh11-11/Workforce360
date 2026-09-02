@@ -1,10 +1,6 @@
 import plotly.graph_objects as go
 import plotly.express as px
 
-# ==========================================================
-# ENTERPRISE COLOR PALETTE
-# ==========================================================
-
 COLORS = [
     "#2563EB",  # Blue
     "#06B6D4",  # Cyan
@@ -21,9 +17,6 @@ PAPER = "#0F172A"
 GRID = "#334155"
 TEXT = "#E2E8F0"
 
-# ==========================================================
-# APPLY GLOBAL PLOTLY THEME
-# ==========================================================
 
 def apply_theme(fig, title=None):
 
@@ -73,10 +66,6 @@ def apply_theme(fig, title=None):
     return fig
 
 
-# ==========================================================
-# KPI GAUGE
-# ==========================================================
-
 def health_gauge(value, title="Health Score"):
 
     fig = go.Figure(
@@ -109,9 +98,6 @@ def health_gauge(value, title="Health Score"):
     return fig
 
 
-# ==========================================================
-# DONUT CHART
-# ==========================================================
 
 def donut_chart(df, column, title):
 
@@ -130,10 +116,6 @@ def donut_chart(df, column, title):
     return apply_theme(fig, title)
 
 
-# ==========================================================
-# BAR CHART
-# ==========================================================
-
 def bar_chart(data, x, y, color=None, title=""):
 
     fig = px.bar(
@@ -150,9 +132,6 @@ def bar_chart(data, x, y, color=None, title=""):
     return apply_theme(fig, title)
 
 
-# ==========================================================
-# LINE CHART
-# ==========================================================
 
 def line_chart(data, x, y, color=None, title=""):
 
@@ -170,9 +149,6 @@ def line_chart(data, x, y, color=None, title=""):
     return apply_theme(fig, title)
 
 
-# ==========================================================
-# AREA CHART
-# ==========================================================
 
 def area_chart(data, x, y, title=""):
 
@@ -185,10 +161,6 @@ def area_chart(data, x, y, title=""):
 
     return apply_theme(fig, title)
 
-
-# ==========================================================
-# SCATTER CHART
-# ==========================================================
 
 def scatter_chart(data, x, y, size=None, color=None, title=""):
 
@@ -204,10 +176,6 @@ def scatter_chart(data, x, y, size=None, color=None, title=""):
     return apply_theme(fig, title)
 
 
-# ==========================================================
-# HEATMAP
-# ==========================================================
-
 def heatmap(matrix, title="Heatmap"):
 
     fig = px.imshow(
@@ -219,9 +187,6 @@ def heatmap(matrix, title="Heatmap"):
     return apply_theme(fig, title)
 
 
-# ==========================================================
-# HISTOGRAM
-# ==========================================================
 
 def histogram(data, column, color=None, title=""):
 
