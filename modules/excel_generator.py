@@ -3,41 +3,28 @@ from pathlib import Path
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 
-# ==========================================================
-# OUTPUT FOLDER
-# ==========================================================
-
 REPORT_FOLDER = Path("data/reports")
 REPORT_FOLDER.mkdir(parents=True, exist_ok=True)
 
 HEADER_FILL = PatternFill("solid", fgColor="1E40AF")
 HEADER_FONT = Font(color="FFFFFF", bold=True)
 
-# ==========================================================
-# WRITE DATAFRAME TO SHEET
-# ==========================================================
 
 def write_dataframe(ws, df):
     """Write any dataframe safely to an Excel worksheet."""
 
-    # Headers
     for col_num, col_name in enumerate(df.columns, start=1):
         cell = ws.cell(row=1, column=col_num, value=str(col_name))
         cell.fill = HEADER_FILL
         cell.font = HEADER_FONT
 
-    # Rows
     for row in df.fillna("").itertuples(index=False):
         ws.append(list(row))
 
-    # Auto width
     for column_cells in ws.columns:
         length = max(len(str(c.value)) if c.value is not None else 0 for c in column_cells)
         ws.column_dimensions[column_cells[0].column_letter].width = min(length + 4, 35)
 
-# ==========================================================
-# EXECUTIVE REPORT GENERATOR
-# ==========================================================
 
 def create_workforce_excel_report(
     df,
@@ -52,9 +39,6 @@ def create_workforce_excel_report(
 
     wb = Workbook()
 
-    # ======================================================
-    # DASHBOARD
-    # ======================================================
 
     dashboard = wb.active
     if dashboard is not None:
@@ -83,16 +67,10 @@ def create_workforce_excel_report(
             dashboard[f"B{row}"] = value
             row += 1
 
-    # ======================================================
-    # EMPLOYEE MASTER
-    # ======================================================
 
     employee_sheet = wb.create_sheet("Employee Master")
     write_dataframe(employee_sheet, df)
 
-    # ======================================================
-    # DEPARTMENT ANALYSIS
-    # ======================================================
 
     if "Department" in df.columns:
 
@@ -112,9 +90,6 @@ def create_workforce_excel_report(
 
         write_dataframe(dept_sheet, dept)
 
-    # ======================================================
-    # SALARY ANALYSIS
-    # ======================================================
 
     if "Salary" in df.columns:
 
@@ -125,9 +100,7 @@ def create_workforce_excel_report(
 
         write_dataframe(salary_sheet, salary_df.sort_values("Salary", ascending=False))
 
-    # ======================================================
-    # ATTENDANCE ANALYSIS
-    # ======================================================
+  
 
     if "Attendance_Percentage" in df.columns:
 
@@ -144,9 +117,6 @@ def create_workforce_excel_report(
 
         write_dataframe(attendance_sheet, attendance_df)
 
-    # ======================================================
-    # PERFORMANCE ANALYSIS
-    # ======================================================
 
     if "Performance_Rating" in df.columns:
 
@@ -166,9 +136,6 @@ def create_workforce_excel_report(
 
         write_dataframe(performance_sheet, performance_df)
 
-    # ======================================================
-    # ATTRITION ANALYSIS
-    # ======================================================
 
     if "Attrition_Status" in df.columns:
 
@@ -187,9 +154,6 @@ def create_workforce_excel_report(
 
         write_dataframe(attrition_sheet, attrition_df.fillna("Unknown"))
 
-    # ======================================================
-    # AI SUMMARY
-    # ======================================================
 
     ai_sheet = wb.create_sheet("AI Workforce Summary")
 
@@ -203,9 +167,6 @@ def create_workforce_excel_report(
     else:
         ai_sheet["A3"] = "No AI Summary Generated."
 
-    # ======================================================
-    # SAVE FILE
-    # ======================================================
 
     output_file = REPORT_FOLDER / f"{dataset_name}_Executive_Report.xlsx"
     wb.save(output_file)
