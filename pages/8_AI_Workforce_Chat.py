@@ -7,10 +7,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
-
 st.set_page_config(
     page_title="AI Workforce Chat",
     layout="wide"
@@ -23,20 +19,12 @@ hero(
     "Ask questions about your workforce dataset using natural language."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
     empty_state("No workforce dataset available.")
     footer()
     st.stop()
-
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -51,10 +39,6 @@ numeric_cols = [
 for col in numeric_cols:
     df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-# ==========================================================
-# CHAT HISTORY
-# ==========================================================
-
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
@@ -67,10 +51,6 @@ question = st.text_input(
     "Ask a workforce question",
     placeholder="Example: Which department has the highest average salary?"
 )
-
-# ==========================================================
-# AI RESPONSE ENGINE
-# ==========================================================
 
 def workforce_answer(query: str):
     
@@ -158,10 +138,6 @@ def workforce_answer(query: str):
         "attrition, departments, cities, overtime, promotions and workforce KPIs."
     )
 
-# ==========================================================
-# ASK BUTTON
-# ==========================================================
-
 if st.button("Generate Answer", use_container_width=True):
 
     if question.strip():
@@ -174,10 +150,6 @@ if st.button("Generate Answer", use_container_width=True):
                 "answer": answer
             }
         )
-
-# ==========================================================
-# CHAT DISPLAY
-# ==========================================================
 
 section(
     "Conversation History",
@@ -201,10 +173,6 @@ else:
 
             st.markdown("**AI Response**")
             st.write(item["answer"])
-
-# ==========================================================
-# QUICK QUESTIONS
-# ==========================================================
 
 section(
     "Quick Business Questions",
@@ -238,10 +206,6 @@ for i, q in enumerate(quick_questions):
         )
 
 st.divider()
-
-# ==========================================================
-# SQL HELPER
-# ==========================================================
 
 section(
     "AI SQL Helper",
@@ -307,10 +271,6 @@ st.download_button(
 )
 
 st.divider()
-
-# ==========================================================
-# DATASET SUMMARY
-# ==========================================================
 
 section(
     "Dataset Summary",
