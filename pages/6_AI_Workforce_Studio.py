@@ -6,9 +6,6 @@ from styles.cards import section, insight, empty_state
 from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(page_title="AI Workforce Studio", layout="wide")
 load_theme()
@@ -18,10 +15,6 @@ hero(
     "Generate HR insights, executive summaries, SQL queries and Power BI DAX formulas using your workforce dataset."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
@@ -29,9 +22,6 @@ if df is None or df.empty:
     footer()
     st.stop()
 
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -45,10 +35,6 @@ numeric_cols = [
 for col in numeric_cols:
     df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-# ==========================================================
-# TABS
-# ==========================================================
-
 tabs = st.tabs([
     "Executive Summary",
     "HR Recommendations",
@@ -56,10 +42,6 @@ tabs = st.tabs([
     "Power BI DAX Generator",
     "Workforce Insights"
 ])
-
-# ==========================================================
-# TAB 1 : EXECUTIVE SUMMARY
-# ==========================================================
 
 with tabs[0]:
 
@@ -104,10 +86,6 @@ The workforce currently contains **{employees:,} employees** across
 The organization maintains overall workforce productivity through attendance and performance metrics while attrition monitoring helps identify retention opportunities across departments.
 """)
 
-# ==========================================================
-# TAB 2 : HR RECOMMENDATIONS
-# ==========================================================
-
 with tabs[1]:
 
     section(
@@ -146,10 +124,6 @@ with tabs[1]:
         st.markdown(f"**Recommendation {i}**")
         st.write(rec)
         st.divider()
-
-# ==========================================================
-# TAB 3 : SQL GENERATOR
-# ==========================================================
 
 with tabs[2]:
 
@@ -218,10 +192,6 @@ LIMIT 20;
         use_container_width=True
     )
 
-# ==========================================================
-# TAB 4 : POWER BI DAX
-# ==========================================================
-
 with tabs[3]:
 
     section(
@@ -274,10 +244,6 @@ COUNTROWS(fact_workforce)"""
         file_name="powerbi_measure.dax",
         use_container_width=True
     )
-
-# ==========================================================
-# TAB 5 : WORKFORCE INSIGHTS
-# ==========================================================
 
 with tabs[4]:
 
