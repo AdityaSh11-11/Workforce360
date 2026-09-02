@@ -20,36 +20,21 @@ from modules.warehouse import (
 
 from modules.audit_engine import write_log
 import streamlit.components.v1 as components
-# ==========================================================
-# PAGE CONFIGURATION
-# ==========================================================
-
 st.set_page_config(
     page_title="Workforce Data Ingestion",
-    page_icon="📊",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ==========================================================
-# LOAD THEME & SIDEBAR
-# ==========================================================
-
 load_theme()
 enterprise_sidebar()
-
-# ==========================================================
-# HERO SECTION
-# ==========================================================
 
 hero(
     "Workforce Data Ingestion",
     "Enterprise ETL Pipeline • CSV & Excel Upload • PostgreSQL Warehouse • Power BI Integration"
 )
 
-# ==========================================================
-# SESSION STATE INITIALIZATION
-# ==========================================================
 
 default_session = {
     "dataset": None,
@@ -63,9 +48,6 @@ for key, value in default_session.items():
     if key not in st.session_state:
         st.session_state[key] = value
 
-# ==========================================================
-# POSTGRESQL WAREHOUSE STATUS
-# ==========================================================
 
 try:
     warehouse_records = warehouse_record_count()
@@ -95,9 +77,6 @@ with c4:
 
 st.divider()
 
-# ==========================================================
-# DATA LOADING MODE
-# ==========================================================
 
 section(
     "Choose Dataset Loading Mode",
@@ -124,10 +103,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# FILE UPLOAD SECTION
-# ==========================================================
-
 section(
     "Upload Workforce Dataset",
     "Supported formats: CSV (.csv), Excel (.xlsx, .xls). The application automatically validates and standardizes the uploaded dataset."
@@ -138,10 +113,6 @@ uploaded_file = st.file_uploader(
     type=["csv", "xlsx", "xls"],
     help="Upload a workforce dataset containing employee, salary, attendance, performance and attrition information."
 )
-
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
 
 if uploaded_file is not None:
 
@@ -172,9 +143,6 @@ if uploaded_file is not None:
 
 st.divider()
 
-# ==========================================================
-# MANUAL EMPLOYEE ENTRY
-# ==========================================================
 
 section(
     "Manual Employee Entry",
@@ -368,9 +336,6 @@ with st.expander("Open Employee Registration Form", expanded=False):
 
 st.divider()
 
-# ==========================================================
-# DATASET QUALITY OVERVIEW
-# ==========================================================
 
 if st.session_state.dataset is not None:
 
@@ -407,9 +372,6 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
-    # ======================================================
-    # DATASET INFORMATION
-    # ======================================================
 
     section(
         "Dataset Information",
@@ -443,9 +405,6 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
-    # ======================================================
-    # DATASET PREVIEW
-    # ======================================================
 
     section(
         "Workforce Dataset Preview",
@@ -460,9 +419,6 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
-    # ======================================================
-    # DOWNLOAD CENTER
-    # ======================================================
 
     section(
         "Dataset Download Center",
@@ -495,9 +451,6 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
-# ==========================================================
-# DATA QUALITY ANALYTICS DASHBOARD
-# ==========================================================
 
 if st.session_state.dataset is not None:
 
@@ -508,9 +461,6 @@ if st.session_state.dataset is not None:
         "Visual exploration of salary, attendance, performance, experience and attrition across the workforce."
     )
 
-    # ------------------------------------------------------
-    # Row 1
-    # ------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
@@ -554,9 +504,6 @@ if st.session_state.dataset is not None:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ------------------------------------------------------
-    # Row 2
-    # ------------------------------------------------------
 
     left, right = st.columns(2)
 
@@ -617,10 +564,6 @@ if st.session_state.dataset is not None:
 
         st.plotly_chart(fig, use_container_width=True)
 
-    # ------------------------------------------------------
-    # Attendance vs Performance
-    # ------------------------------------------------------
-
     section(
         "Attendance vs Performance Intelligence",
         "Bubble size represents employee training hours while color represents department."
@@ -654,9 +597,6 @@ if st.session_state.dataset is not None:
 
     st.plotly_chart(fig, use_container_width=True)
 
-    # ------------------------------------------------------
-    # Salary vs Experience
-    # ------------------------------------------------------
 
     col1, col2 = st.columns(2)
 
@@ -713,9 +653,6 @@ if st.session_state.dataset is not None:
 
     st.divider()
 
-    # ==========================================================
-    # BUSINESS INSIGHT PANEL
-    # ==========================================================
 
     section(
         "Business Insight Summary",
@@ -767,9 +704,6 @@ expand learning programs for lower-performing teams, and use salary intelligence
 
     st.divider()
 
-    # ==========================================================
-    # POSTGRESQL WAREHOUSE CONTROL CENTER
-    # ==========================================================
 
     section(
         "PostgreSQL Warehouse & Power BI Control Center",
@@ -793,9 +727,6 @@ expand learning programs for lower-performing teams, and use salary intelligence
 
     button1, button2, button3 = st.columns(3)
 
-    # ----------------------------------------------------------
-    # INSERT DATA INTO POSTGRESQL
-    # ----------------------------------------------------------
 
     with button1:
 
@@ -828,9 +759,6 @@ expand learning programs for lower-performing teams, and use salary intelligence
                 "Power BI will display the latest workforce data after clicking Refresh."
             )
 
-    # ----------------------------------------------------------
-    # DELETE DATA FROM POSTGRESQL
-    # ----------------------------------------------------------
 
     with button2:
 
@@ -855,11 +783,7 @@ expand learning programs for lower-performing teams, and use salary intelligence
                 "After refreshing Power BI, the dashboard will become empty until a new dataset is uploaded."
             )
 
-  
-
-# ==========================================================
-# CURRENT SESSION DATASET SUMMARY
-# ==========================================================
+ 
 
 section(
     "Current Session Dataset Summary",
@@ -909,9 +833,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# RESET SESSION WORKSPACE
-# ==========================================================
 
 section(
     "Reset Streamlit Workspace",
@@ -955,9 +876,6 @@ if st.button(
 
 st.divider()
 
-# ==========================================================
-# PLATFORM FEATURES OVERVIEW
-# ==========================================================
 
 section(
     "InsightForge AI Platform Capabilities",
@@ -994,32 +912,5 @@ with feature_col2:
         - AI Workforce Insights
         - Live Power BI Integration
         """
-    )
-
-st.divider()
-
-# ==========================================================
-# PROJECT INFORMATION
-# ==========================================================
-
-section(
-    "About This Platform",
-    "Enterprise Workforce Analytics & Decision Intelligence Platform"
-)
-
-st.info(
-    """
-    **InsightForge AI** is an enterprise workforce intelligence platform built using
-    Streamlit, PostgreSQL, Plotly, OpenRouter AI, and Power BI.
-
-    The platform enables HR teams to ingest workforce datasets, perform advanced analytics,
-    generate AI-powered insights, manage a PostgreSQL warehouse, and visualize executive dashboards
-    through a live-connected Power BI report.
-    """
-)
-
-# ==========================================================
-# FOOTER
-# ==========================================================
-
-footer()
+    
+    )===================================
