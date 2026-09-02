@@ -912,3 +912,4 @@ with feature_col2:
         - AI Workforce Insights
         - Live Power BI Integration
         """
+    )
