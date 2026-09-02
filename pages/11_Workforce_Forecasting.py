@@ -9,9 +9,7 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
+
 
 st.set_page_config(
     page_title="Workforce Forecasting",
@@ -25,9 +23,7 @@ hero(
     "Predict hiring demand, attrition trends, payroll growth and workforce planning for future business expansion."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
+
 
 df = get_active_dataset()
 
@@ -36,9 +32,6 @@ if df is None or df.empty:
     footer()
     st.stop()
 
-# ==========================================================
-# CLEAN DATA (NaN SAFE)
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -67,9 +60,6 @@ current_attrition = (
 avg_salary = 0 if np.isnan(avg_salary) else avg_salary
 current_attrition = round(current_attrition, 2)
 
-# ==========================================================
-# KPI SECTION
-# ==========================================================
 
 section(
     "Executive Forecast Snapshot",
@@ -85,9 +75,6 @@ c4.metric("Current Attrition", f"{current_attrition}%")
 
 st.divider()
 
-# ==========================================================
-# FORECAST SETTINGS
-# ==========================================================
 
 section(
     "Forecast Configuration",
@@ -119,9 +106,6 @@ salary_growth = col3.slider(
 
 months = np.arange(1, forecast_months + 1)
 
-# ==========================================================
-# HIRING FORECAST
-# ==========================================================
 
 section(
     "Projected Hiring Forecast",
@@ -158,9 +142,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# ATTRITION FORECAST
-# ==========================================================
 
 section(
     "Projected Attrition Forecast",
@@ -197,9 +178,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# SALARY FORECAST
-# ==========================================================
 
 section(
     "Salary Growth Forecast",
@@ -236,9 +214,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# DEPARTMENT HIRING PLAN
-# ==========================================================
 
 section(
     "Department Hiring Recommendations",
@@ -282,9 +257,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# HEADCOUNT COMPARISON
-# ==========================================================
 
 section(
     "Current vs Future Headcount",
@@ -305,9 +277,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
-# ==========================================================
-# PROMOTION FORECAST
-# ==========================================================
+
 
 section(
     "Promotion Forecast",
@@ -346,9 +316,6 @@ st.dataframe(
 
 st.divider()
 
-# ==========================================================
-# PAYROLL FORECAST
-# ==========================================================
 
 section(
     "Payroll Budget Forecast",
@@ -395,9 +362,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# EXECUTIVE AI SUMMARY
-# ==========================================================
 
 section(
     "Executive Workforce Planning Summary",
