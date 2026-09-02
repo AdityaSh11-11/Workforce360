@@ -8,9 +8,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(page_title="Attrition Intelligence", layout="wide")
 load_theme()
@@ -20,20 +17,12 @@ hero(
     "Identify employee attrition patterns, retention risks and workforce stability using business intelligence."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
-
 df = get_active_dataset()
 
 if df is None or df.empty:
     empty_state("No workforce dataset available.")
     footer()
     st.stop()
-
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Salary",
@@ -49,9 +38,6 @@ for col in numeric_cols:
 
 df["Attrition_Status"] = df["Attrition_Status"].fillna("Active").astype(str)
 
-# ==========================================================
-# FILTERS
-# ==========================================================
 
 section(
     "Attrition Filters",
@@ -88,10 +74,6 @@ if city != "All":
 if employment != "All":
     filtered = filtered[filtered["Employment_Type"] == employment]
 
-# ==========================================================
-# KPI SECTION
-# ==========================================================
-
 section(
     "Attrition KPI Overview",
     "Executive view of workforce retention and employee exits."
@@ -111,10 +93,6 @@ r1[2].metric("Employees Left", left)
 r1[3].metric("Attrition Rate", f"{attrition_rate}%")
 
 st.divider()
-
-# ==========================================================
-# ATTRITION DISTRIBUTION
-# ==========================================================
 
 section(
     "Attrition Status Distribution",
@@ -145,10 +123,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# ATTRITION BY DEPARTMENT
-# ==========================================================
 
 section(
     "Attrition by Department",
@@ -182,10 +156,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# ATTRITION BY CITY
-# ==========================================================
-
 section(
     "Attrition by Location",
     "Geographic analysis of employee exits."
@@ -216,10 +186,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# EXPERIENCE VS ATTRITION
-# ==========================================================
 
 section(
     "Experience and Attrition",
@@ -253,10 +219,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# SALARY BAND ATTRITION
-# ==========================================================
-
 section(
     "Salary Band Attrition",
     "Relationship between salary bands and employee exits."
@@ -289,10 +251,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# PERFORMANCE VS ATTRITION
-# ==========================================================
-
 section(
     "Performance and Attrition",
     "Compare employee performance ratings with attrition status."
@@ -317,10 +275,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# OVERTIME VS ATTRITION
-# ==========================================================
 
 section(
     "Overtime Impact on Attrition",
@@ -347,10 +301,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# RETENTION WATCHLIST
-# ==========================================================
 
 section(
     "Retention Risk Watchlist",
@@ -389,10 +339,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# EXECUTIVE SUMMARY
-# ==========================================================
 
 section(
     "Executive Attrition Summary",
