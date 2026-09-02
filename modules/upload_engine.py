@@ -1,10 +1,6 @@
 import pandas as pd
 import numpy as np
 
-# ==========================================================
-# UNIVERSAL WORKFORCE SCHEMA
-# ==========================================================
-
 REQUIRED_COLUMNS = [
     "Employee_ID",
     "Employee_Name",
@@ -29,9 +25,6 @@ REQUIRED_COLUMNS = [
     "Attrition_Status"
 ]
 
-# ==========================================================
-# AUTO COLUMN MAPPING
-# ==========================================================
 
 COLUMN_MAPPING = {
     "employee id":"Employee_ID",
@@ -106,9 +99,6 @@ COLUMN_MAPPING = {
     "left company":"Attrition_Status"
 }
 
-# ==========================================================
-# LOAD CSV / EXCEL
-# ==========================================================
 
 def load_uploaded_file(file):
 
@@ -130,9 +120,6 @@ def load_uploaded_file(file):
         "quality":calculate_quality(df)
     }
 
-# ==========================================================
-# STANDARDIZE
-# ==========================================================
 
 def standardize_columns(df):
 
@@ -155,9 +142,6 @@ def standardize_columns(df):
 
     return df[REQUIRED_COLUMNS]
 
-# ==========================================================
-# CLEAN DATASET
-# ==========================================================
 
 def clean_dataset(df):
 
@@ -204,9 +188,6 @@ def clean_dataset(df):
 
     return create_derived_columns(df)
 
-# ==========================================================
-# DERIVED COLUMNS
-# ==========================================================
 
 def create_derived_columns(df):
 
@@ -236,9 +217,6 @@ def create_derived_columns(df):
 
     return df.reset_index(drop=True)
 
-# ==========================================================
-# QUALITY SCORE
-# ==========================================================
 
 def calculate_quality(df):
 
@@ -267,9 +245,6 @@ def calculate_quality(df):
         "duplicate_rows":duplicates
     }
 
-# ==========================================================
-# MANUAL EMPLOYEE ENTRY
-# ==========================================================
 
 def create_manual_employee_dataframe(employee:dict):
 
