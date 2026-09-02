@@ -1,18 +1,11 @@
 import streamlit as st
 
-# ==========================================================
-# SECTION HEADER
-# ==========================================================
-
 def section(title, description=""):
     st.markdown(f"## {title}")
     if description:
         st.caption(description)
     st.write("")
 
-# ==========================================================
-# KPI CARD (NO HTML)
-# ==========================================================
 
 def kpi(title, value, subtitle=""):
     with st.container(border=True):
@@ -21,9 +14,6 @@ def kpi(title, value, subtitle=""):
         if subtitle:
             st.caption(subtitle)
 
-# ==========================================================
-# DATASET CARD
-# ==========================================================
 
 def dataset_card(name, dtype, rows):
     with st.container(border=True):
@@ -35,10 +25,6 @@ def dataset_card(name, dtype, rows):
         c2.metric("Dataset Type", dtype)
         c3.metric("Records", f"{rows:,}")
 
-# ==========================================================
-# FILTER PANEL
-# ==========================================================
-
 def filter_panel():
     with st.container(border=True):
         st.markdown("#### Dashboard Filters")
@@ -46,9 +32,7 @@ def filter_panel():
             "Filter employees by department, city, gender, employment type and performance."
         )
 
-# ==========================================================
-# INSIGHT BOX
-# ==========================================================
+
 
 def insight(title, insight, recommendation=""):
     with st.container(border=True):
@@ -62,18 +46,11 @@ def insight(title, insight, recommendation=""):
             st.markdown("**Business Recommendation**")
             st.write(recommendation)
 
-# ==========================================================
-# AI SUMMARY
-# ==========================================================
 
 def ai_summary(summary):
     with st.container(border=True):
         st.markdown("### AI Workforce Executive Summary")
         st.write(summary)
-
-# ==========================================================
-# EMPTY STATE
-# ==========================================================
 
 def empty_state(message):
     st.info(message)
