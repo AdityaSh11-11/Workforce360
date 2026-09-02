@@ -8,9 +8,6 @@ from modules.data_loader import get_active_dataset
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
 
 st.set_page_config(page_title="Employee Analytics", layout="wide")
 load_theme()
@@ -20,9 +17,6 @@ hero(
     "Explore employee demographics, salary, attendance, experience and individual workforce profiles."
 )
 
-# ==========================================================
-# LOAD DATASET
-# ==========================================================
 
 df = get_active_dataset()
 
@@ -31,9 +25,6 @@ if df is None or df.empty:
     footer()
     st.stop()
 
-# ==========================================================
-# CLEAN DATA
-# ==========================================================
 
 numeric_cols = [
     "Age",
@@ -50,9 +41,6 @@ for col in numeric_cols:
 
 df["Joining_Date"] = pd.to_datetime(df["Joining_Date"], errors="coerce")
 
-# ==========================================================
-# FILTERS
-# ==========================================================
 
 section(
     "Employee Filters",
@@ -99,9 +87,6 @@ if employment != "All":
 
 st.divider()
 
-# ==========================================================
-# KPI SECTION
-# ==========================================================
 
 section(
     "Workforce Summary",
@@ -123,10 +108,6 @@ with r1[3]:
     kpi("Average Experience", f"{filtered['Experience_Years'].mean():.1f} Years")
 
 st.divider()
-
-# ==========================================================
-# DEMOGRAPHIC ANALYTICS
-# ==========================================================
 
 section(
     "Employee Demographics",
@@ -173,10 +154,6 @@ insight(
 )
 
 st.divider()
-
-# ==========================================================
-# SALARY ANALYTICS
-# ==========================================================
 
 section(
     "Salary Intelligence",
@@ -228,10 +205,6 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# ATTENDANCE & PERFORMANCE
-# ==========================================================
-
 section(
     "Attendance and Performance",
     "Compare employee attendance with performance ratings."
@@ -263,9 +236,7 @@ insight(
 
 st.divider()
 
-# ==========================================================
-# EXPERIENCE ANALYTICS
-# ==========================================================
+
 
 section(
     "Experience Distribution",
@@ -292,9 +263,6 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
-# ==========================================================
-# EMPLOYEE DIRECTORY
-# ==========================================================
 
 section(
     "Employee Directory",
@@ -357,9 +325,6 @@ st.dataframe(info, use_container_width=True, hide_index=True)
 
 st.divider()
 
-# ==========================================================
-# FULL EMPLOYEE TABLE
-# ==========================================================
 
 section(
     "Complete Employee Dataset",
