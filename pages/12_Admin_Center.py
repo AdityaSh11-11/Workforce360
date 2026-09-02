@@ -10,9 +10,7 @@ from modules.warehouse import engine
 from components.sidebar import enterprise_sidebar
 
 enterprise_sidebar()
-# ==========================================================
-# PAGE CONFIG
-# ==========================================================
+
 
 st.set_page_config(
     page_title="Admin Center",
@@ -25,10 +23,6 @@ hero(
     "Admin Center",
     "Monitor PostgreSQL Warehouse, Session Status, Dataset Registry and Platform Health."
 )
-
-# ==========================================================
-# SYSTEM HEALTH
-# ==========================================================
 
 section(
     "Platform Health Overview",
@@ -61,9 +55,6 @@ st.info(db_message)
 
 st.divider()
 
-# ==========================================================
-# ACTIVE DATASET INFORMATION
-# ==========================================================
 
 section(
     "Current Dataset Information",
@@ -109,9 +100,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# POSTGRESQL WAREHOUSE STATUS
-# ==========================================================
 
 section(
     "Warehouse Table Status",
@@ -160,9 +148,6 @@ except Exception:
 
 st.divider()
 
-# ==========================================================
-# SESSION STATE MONITOR
-# ==========================================================
 
 section(
     "Session State Monitor",
@@ -201,9 +186,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# DATASET PREVIEW
-# ==========================================================
 
 section(
     "Active Dataset Preview",
@@ -223,9 +205,6 @@ else:
 
 st.divider()
 
-# ==========================================================
-# PLATFORM INFORMATION
-# ==========================================================
 
 section(
     "Platform Configuration",
@@ -263,9 +242,6 @@ st.dataframe(
 
 st.divider()
 
-# ==========================================================
-# SYSTEM STATISTICS
-# ==========================================================
 
 section(
     "Platform Statistics",
@@ -290,9 +266,6 @@ if dataset_loaded:
 
 st.divider()
 
-# ==========================================================
-# RESET WORKSPACE
-# ==========================================================
 
 section(
     "Workspace Management",
@@ -323,9 +296,6 @@ if st.button("Clear Current Session Workspace", use_container_width=True):
 
 st.divider()
 
-# ==========================================================
-# EXECUTIVE ADMIN SUMMARY
-# ==========================================================
 
 section(
     "Executive Admin Summary",
