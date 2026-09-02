@@ -21,108 +21,130 @@ if not DATABASE_URL:
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
 def initialize_database():
+
     with engine.begin() as conn:
 
-        # Audit Log Table
+        # ================================
+        # DATASET REGISTRY
+        # ================================
         conn.execute(text("""
-        CREATE TABLE IF NOT EXISTS audit_log(
-            log_id SERIAL PRIMARY KEY,
-            dataset_id INTEGER,
-            activity TEXT,
-            records_processed INTEGER,
-            log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        CREATE TABLE IF NOT EXISTS dataset_registry(
+            dataset_id SERIAL PRIMARY KEY,
+            dataset_name TEXT NOT NULL,
+            dataset_type TEXT,
+            quality_score FLOAT,
+            total_records INTEGER,
+            upload_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """))
 
+        # ================================
+        # FACT WORKFORCE
+        # ================================
         conn.execute(text("""
         CREATE TABLE IF NOT EXISTS fact_workforce(
-
-            workforce_id SERIAL PRIMARY KEY,
-
             employee_id TEXT,
             employee_name TEXT,
             gender TEXT,
             age INTEGER,
-
             email TEXT,
             phone TEXT,
-
             department TEXT,
             job_role TEXT,
-
             city TEXT,
             state TEXT,
-
             joining_date DATE,
             employment_type TEXT,
-
             salary FLOAT,
             experience_years FLOAT,
             tenure_years FLOAT,
-
             attendance_percentage FLOAT,
             performance_rating FLOAT,
-
             training_hours FLOAT,
             overtime_hours FLOAT,
-
             promotion_status TEXT,
             attrition_status TEXT,
-
             salary_band TEXT,
             experience_group TEXT,
-
             joining_year INTEGER,
             joining_month TEXT,
             joining_quarter TEXT,
-
-            dataset_id INTEGER
+            dataset_id INTEGER REFERENCES dataset_registry(dataset_id)
         );
         """))
 
+        # ================================
+        # AUDIT LOG
+        # ================================
         conn.execute(text("""
         CREATE TABLE IF NOT EXISTS audit_log(
-
             log_id SERIAL PRIMARY KEY,
-
-            dataset_id INTEGER,
-
-            activity TEXT,
-
-            records_processed INTEGER,
-
-            log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            action TEXT,
+            dataset_name TEXT,
+            records INTEGER,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """))
 
+        # ================================
+        # DEPARTMENT DIMENSION
+        # ================================
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS dim_department(
+            department_id SERIAL PRIMARY KEY,
+            department_name TEXT UNIQUE
+        );
+        """))
 
-def register_dataset(name, dtype, quality, rows):
+        # ================================
+        # LOCATION DIMENSION
+        # ================================
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS dim_location(
+            location_id SERIAL PRIMARY KEY,
+            city TEXT,
+            state TEXT
+        );
+        """))
+
+        # ================================
+        # DATE DIMENSION
+        # ================================
+        conn.execute(text("""
+        CREATE TABLE IF NOT EXISTS dim_date(
+            date_id SERIAL PRIMARY KEY,
+            joining_date DATE,
+            joining_year INTEGER,
+            joining_month TEXT,
+            joining_quarter TEXT
+        );
+        """))
+
+def register_dataset(dataset_name, dataset_type, quality_score, rows):
 
     initialize_database()
 
     with engine.begin() as conn:
 
         dataset_id = conn.execute(text("""
-        INSERT INTO dataset_registry
-        (
-            dataset_name,
-            dataset_type,
-            quality_score,
-            total_records
-        )
-        VALUES
-        (
-            :name,
-            :dtype,
-            :quality,
-            :rows
-        )
-        RETURNING dataset_id;
+            INSERT INTO dataset_registry(
+                dataset_name,
+                dataset_type,
+                quality_score,
+                total_records
+            )
+            VALUES(
+                :name,
+                :dtype,
+                :quality,
+                :rows
+            )
+            RETURNING dataset_id;
         """),{
-            "name":name,
-            "dtype":dtype,
-            "quality":quality,
-            "rows":rows
+            "name": dataset_name,
+            "dtype": dataset_type,
+            "quality": quality_score,
+            "rows": rows
         }).scalar()
 
     return dataset_id
