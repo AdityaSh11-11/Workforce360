@@ -2,17 +2,10 @@ import pandas as pd
 import numpy as np
 import re
 
-# ==========================================================
-# REGEX VALIDATORS
-# ==========================================================
-
 EMAIL_REGEX = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
 PHONE_REGEX = r"^[0-9]{10}$"
 
 
-# ==========================================================
-# MAIN QUALITY ENGINE
-# ==========================================================
 
 def run_quality_checks(df: pd.DataFrame):
 
@@ -41,10 +34,6 @@ def run_quality_checks(df: pd.DataFrame):
     return report
 
 
-# ==========================================================
-# DUPLICATE EMPLOYEE IDS
-# ==========================================================
-
 def duplicate_employee_ids(df):
 
     if "Employee_ID" not in df.columns:
@@ -52,10 +41,6 @@ def duplicate_employee_ids(df):
 
     return int(df["Employee_ID"].duplicated().sum())
 
-
-# ==========================================================
-# EMAIL VALIDATION
-# ==========================================================
 
 def invalid_emails(df):
 
@@ -69,10 +54,6 @@ def invalid_emails(df):
     return int(invalid.sum())
 
 
-# ==========================================================
-# PHONE VALIDATION
-# ==========================================================
-
 def invalid_phones(df):
 
     if "Phone" not in df.columns:
@@ -83,11 +64,6 @@ def invalid_phones(df):
     )
 
     return int(invalid.sum())
-
-
-# ==========================================================
-# SALARY OUTLIERS
-# ==========================================================
 
 def salary_outliers(df):
 
@@ -107,9 +83,6 @@ def salary_outliers(df):
     return int(len(outliers))
 
 
-# ==========================================================
-# ATTENDANCE OUTLIERS
-# ==========================================================
 
 def attendance_outliers(df):
 
@@ -124,10 +97,6 @@ def attendance_outliers(df):
     return int(len(invalid))
 
 
-# ==========================================================
-# PERFORMANCE OUTLIERS
-# ==========================================================
-
 def performance_outliers(df):
 
     if "Performance_Rating" not in df.columns:
@@ -140,10 +109,6 @@ def performance_outliers(df):
 
     return int(len(invalid))
 
-
-# ==========================================================
-# COLUMN MISSING SUMMARY
-# ==========================================================
 
 def column_missing(df):
 
@@ -162,10 +127,6 @@ def column_missing(df):
 
     return summary
 
-
-# ==========================================================
-# DEPARTMENT HEALTH REPORT
-# ==========================================================
 
 def department_health(df):
 
@@ -197,10 +158,6 @@ def department_health(df):
     return report
 
 
-# ==========================================================
-# QUALITY SCORE ENGINE
-# ==========================================================
-
 def quality_score(report):
 
     score = 100
@@ -219,9 +176,6 @@ def quality_score(report):
     return round(float(score), 2)
 
 
-# ==========================================================
-# BUSINESS RECOMMENDATIONS
-# ==========================================================
 
 def recommendations(report):
 
@@ -255,10 +209,6 @@ def recommendations(report):
 
     return tips
 
-
-# ==========================================================
-# AI QUALITY SUMMARY
-# ==========================================================
 
 def quality_summary(report):
 
